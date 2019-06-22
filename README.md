@@ -7,7 +7,7 @@ links are separated into user-defined buckets, which can be as broad or narrow a
 ### Getting started
 [1] Clone the repository
 ```bash
-git clone xxxxxxxxx
+git clone https://github.com/minelminel/linkr.git
 cd linkr
 ```
 [2] Install dependencies
