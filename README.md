@@ -19,10 +19,38 @@ Linkr is a simple way to save, organize, and share web pages. Links are separate
         └── LinkedIn
 ```
 
-Why use Linkr instead of your browser's built-in Bookmarks? Linkr securely stores all your pages in the cloud and won't require you to sync your browser by linking it with your email account. In addition, Linkr allows you to easily share any bucket with a single click--letting you pass them along to coworkers, family, and friends--who can then easily view and access the links through our simple iterface. No more emailing lists of links!
+Why use Linkr instead of your browser's built-in Bookmarks? Linkr securely stores all your pages in the cloud and won't require you to sync your browser by linking it with your email account. In addition, Linkr allows you to easily share any bucket with a single click--letting you pass them along to coworkers, family, and friends--who can then easily view and access the links through our simple interface. No more emailing lists of links!
 
+---
 
-## Getting Started
+## Table of Contents
+- [Getting Started](#gettingstarted)
+    - [Quick Start](#quickstart)
+    - [Docker](#docker)
+    - [Deployment](#deployment)
+- [User Guide](#userguide)
+    - [Terminology](#terminology)
+        - [Tub](#tub)
+        - [Bucket](#bucket)
+        - [Link](#link)
+        - [Tag](#tag)
+    - [Creating Accounts](#createaccount)
+    - [Create a Tub](#createtub)
+    - [Create a Bucket](#createbucket)
+    - [Adding Links](#addinglinks)
+    - [Editing](#editing)
+    - [Sharing](#sharing)
+        - [Tub](#sharetub)
+        - [Bucket](#sharebucket)
+        - [Link](#sharelink)
+        - [Collaboration](#collaboration)
+- [Authors](#authors)
+- [Acknowledgements](#acknowledgements)
+
+---
+
+# Getting Started <a name="gettingstarted"></a>
+## Quick Start <a name="quickstart"></a>
 Before you begin, make sure you have the lastest version of Python & pip
 ```bash
 python --version
@@ -63,7 +91,9 @@ python manage.py runserver
 
 [localhost:8000](localhost:8000)
 
-## Docker
+---  
+
+## Docker <a name="docker"></a>
 [1] Make sure you have Docker Desktop & Docker Compose installed
 ```bash
 docker --version
@@ -86,3 +116,36 @@ docker build -t linkr:lastest .
 ```bash
 docker-compose up
 ```
+
+---
+
+## Deployment <a name="deployment"></a>
+[1]
+```bash
+
+```
+
+[2]
+```bash
+
+```
+
+[3]
+```bash
+
+```
+
+---
+
+# User Guide <a name="userguide"></a>
+ipsum lorem
+
+---
+
+# Authors <a name="authors"></a>
+ipsum lorem
+
+---
+
+# Acknowledgements <a name="userguide"></a>
+ipsum lorem
