@@ -4,3 +4,5 @@ __pycache__/
 lib/
 bin/
 include/
+examples/
+resetdatabase.sh
