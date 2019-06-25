@@ -19,7 +19,7 @@ Linkr is a simple way to save, organize, and share web pages. Links are separate
         └── LinkedIn
 ```
 
-Why use Linkr instead of your browser's built-in Bookmarks? Linkr securely stores all your pages in the cloud and won't require you to sync your browser by linking it with your email account. In addition, Linkr allows you to easily share any bucket with a single click--letting you pass them along to coworkers, family, and friends--who can then easily view and access the links through our simple interface. No more emailing lists of links!
+Why use Linkr instead of your browser's built-in Bookmarks? Linkr securely stores all your pages in the cloud and won't require you to sync your browser by linking it with your email account. In addition, Linkr allows you to easily share any bucket with a single click--letting you pass them along to coworkers, family, and friends--who can then easily view and access the links through a simple interface.
 
 ---
 
@@ -80,10 +80,14 @@ source bin/activate
 [3] Install dependencies
 ```bash
 pip install -r requirements.txt
+cd src # BASE_DIR
 ```
 
-[4] Start the server
+[4] Initialize database & server
 ```bash
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
 python manage.py runserver
 ```
 
