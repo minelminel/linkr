@@ -55,6 +55,7 @@ Before you begin, make sure you have the lastest version of Python & pip
 ```bash
 python --version
 >>> Python 3.7.3
+
 pip --version
 >>> pip 19.1.1 from /../../pip (Python 3.7)
 ```
@@ -86,14 +87,17 @@ cd src # BASE_DIR
 [4] Initialize database & server
 ```bash
 python manage.py makemigrations
+
 python manage.py migrate
+
 python manage.py createsuperuser
+
 python manage.py runserver
 ```
 
 [5] View in browser
 
-[localhost:8000](localhost:8000)
+[http://localhost:8000](http://localhost:8000)
 
 ---  
 
@@ -106,10 +110,7 @@ docker-compose --version
 
 Docker Desktop can be downloaded by visiting [this link](https://www.docker.com/products/docker-desktop)
 
-docker-compose can be installed via `pip`
-```bash
-pip install docker-compose
-```
+docker-compose can be installed with `pip install docker-compose`
 
 [2] Build Docker Image
 ```bash
@@ -118,9 +119,13 @@ docker build -t linkr:lastest .
 
 [3] Spin Up Container
 ```bash
-docker-compose up
+docker run -p 8000:8000 linkr
 ```
 
+*`convenience script, which runs the previous 2 commands`*
+```bash
+sh deploy.sh
+```
 ---
 
 ## Deployment <a name="deployment"></a>

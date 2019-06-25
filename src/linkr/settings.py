@@ -25,7 +25,7 @@ SECRET_KEY = '^fnsjs_3c5p+ixs!@d4*15(m5%kkd=y$(b!)jrilp!u0o)!vyh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
