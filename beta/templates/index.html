@@ -6,117 +6,132 @@
   <script src="https://kit.fontawesome.com/29a13740e7.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
-  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-  <title>FLASK</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+  <title>linkr</title>
 </head>
 
 <body>
 
-  <!-- <div class="container shadow">
-    <div class="row justify-content-center">
-      <form class="" action="{{ url_for('index') }}" method="post">
-        <label for="txtbox"></label>
-        <input type="text" name="txtbox" value="" placeholder="Paste your link here" required>
-        <button class="btn btn-info" type="submit" name="" value="View"><i class="fas fa-search"></i></button>
-      </form>
-    </div>
-  </div> -->
 
   <div class="row justify-content-center">
-    <h3><a href="{{ url_for('index') }}">RELOAD</a></h3>
+    <ul>
+      <li>
+        <h3><a href="{{ url_for('index') }}">RELOAD</a></h3>
+      </li>
+    </ul>
   </div>
-  <hr>
+
   <br>
+  <hr>
+
   <!--  -->
   <!-- start of content -->
   <!--  -->
 
-{{ database }}
 
-  <div class="container">
+  <div class="container border">
     <div class="row">
-      <div class="col">
-        <h3>BUCKETS</h3>
-        {% for data in database %}
-        <div>{{ data['name'] }}</div>
-        {% endfor %}
+
+      <div class="col-md-4">
+        <div class="container">
+          <h3>BUCKETS</h3>
+          <!-- <div><a href="#" class="btn btn-primary btn-block" role="button" target="">Label <i class="far fa-file"></i></a></div> -->
+          <div class="list-group">
+            {% for bucket in buckets %}
+            {% if bucket.active is sameas True %}
+            <a href="/?bucket={{ bucket['id'] }}" id="bucket-{{ bucket['id'] }}" class="list-group-item list-group-item-action active">{{ bucket['name'] }}</a>
+            {% else %}
+            <a href="/?bucket={{ bucket['id'] }}" id="bucket-{{ bucket['id'] }}" class="list-group-item list-group-item-action">{{ bucket['name'] }}</a>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <!-- /BUCKETS -->
       </div>
-      <div class="col">
-        <h3>LINKS</h3>
+      <div class="col-md-4">
+        <div class="container">
+          <h3>LINKS</h3>
+          <div class="list-group">
+            {% for link in links %}
+            {% if link.active is sameas True %}
+            <a href="/?bucket={{ link['parent'] }}&link={{ link['id'] }}" id="link-{{ link['id'] }}" class="list-group-item list-group-item-action active">{{ link['url'] }}</a>
+            {% else %}
+            <a href="/?bucket={{ link['parent'] }}&link={{ link['id'] }}" id="link-{{ link['id'] }}" class="list-group-item list-group-item-action">{{ link['url'] }}</a>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <!-- /LINKS -->
       </div>
-      <div class="col">
+      <div class="col-md-4">
         <h3>DETAILS</h3>
+        <div class="container">
+          <div class="card" style="width: auto;">
+            <div class="jumbotron ribbon" style="height: 30px;  background-color: rgba(137,131,141,0.1);">
+              <div class="img-thumbnail-mr-4">
+                {% if schema['favicon'] is sameas '' %}
+                <img class="img-responsive" style="max-width: 16px;" src="{{ url_for('static', filename='images/favicon.png') }}" alt="">
+                {% else %}
+                <img class="img-responsive" style="max-width: 16px;" src="{{ schema['favicon'] }}" alt="">
+                {% endif %}
+                <small>RESPONSE: {{ schema['status'] }}</small>
+              </div>
+              <samp>{{ schema['friendly'] }}</samp>
+            </div>
+            <div class="card-body">
+              {% if schema['target'] is sameas '' %}
+              <h5 class="card-title">TITLE</h5>
+              <small>
+                <p class="text-overflow" style="text-overflow: ellipsis;">Description</p>
+              </small>
+              <div class="row">
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-outline-success btn-block" disabled>Open Tab <i class="far fa-file"></i></button>
+                </div>
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-outline-secondary btn-block" disabled>Copy Link <i class="far fa-clipboard"></i></button>
+                </div>
+              </div>
+              {% else %}
+              <h5 class="card-title">{{ schema['title'] }}</h5>
+              <small>
+                <p class="text-overflow" style="text-overflow: ellipsis;">{{ schema['description'] }}</p>
+              </small>
+              <small><input type="text" id="inputContainingTextToBeCopied" value="{{ schema['target'] }}" style="opacity: 0;" /></small>
+              <div class="row">
+                <div class="col-md-6">
+                  <a href="{{ schema['target'] }}" class="btn btn-success btn-block" role="button" target="_blank">Open Tab <i class="far fa-file"></i></a>
+                </div>
+                <div class="col-md-6">
+                  <button class="btn btn-secondary btn-block" role="button" onclick="copyToClipboardFunction()" onmouseout="outFunc()">
+                    <span class="tooltiptext" id="myTooltip">Copy Link <i class="far fa-clipboard"></i></span></button>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+
+        <script type="text/javascript">
+          function copyToClipboardFunction() {
+            var copyText = document.getElementById("inputContainingTextToBeCopied");
+            copyText.select();
+            document.execCommand("copy");
+            var tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Done!";
+          }
+
+          function outFunc() {
+            var tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Copy Link";
+          }
+        </script>
+        <!-- /DETAILS -->
       </div>
+
     </div>
   </div>
-
-
-
-  <br>
-  <hr>
-  <br>
-  <div class="container shadow">
-    <div class="card" style="width: 30rem;">
-      <div class="jumbotron ribbon" style="height: 30px;  background-color: rgba(137,131,141,0.1);">
-        <div class="img-thumbnail-mr-4">
-          {% if schema['favicon'] is sameas '' %}
-          <img class="img-responsive" style="max-width: 16px;" src="{{ url_for('static', filename='images/favicon.png') }}" alt="">
-          {% else %}
-          <img class="img-responsive" style="max-width: 16px;" src="{{ schema['favicon'] }}" alt="Card image caption">
-          {% endif %}
-          <small>RESPONSE: {{ schema['status'] }}</small>
-        </div>
-        <samp>{{ schema['friendly'] }}</samp>
-      </div>
-      <div class="card-body">
-        {% if schema['target'] is sameas '' %}
-        <h5 class="card-title">TITLE</h5>
-        <small>
-          <p class="text-overflow" style="text-overflow: ellipsis;">Description</p>
-        </small>
-        <div class="row">
-          <div class="col-md-6">
-            <button type="button" class="btn btn-outline-success btn-block" disabled>Open Tab <i class="far fa-file"></i></button>
-          </div>
-          <div class="col-md-6">
-            <button type="button" class="btn btn-outline-secondary btn-block" disabled>Copy Link <i class="far fa-clipboard"></i></button>
-          </div>
-        </div>
-        {% else %}
-        <h5 class="card-title">{{ schema['title'] }}</h5>
-        <small>
-          <p class="text-overflow" style="text-overflow: ellipsis;">{{ schema['description'] }}</p>
-        </small>
-        <small><input type="text" id="inputContainingTextToBeCopied" value="{{ schema['target'] }}" style="opacity: 0;" /></small>
-        <div class="row">
-          <div class="col-md-6">
-            <a href="{{ schema['target'] }}" class="btn btn-success btn-block" role="button" target="_blank">Open Tab <i class="far fa-file"></i></a>
-          </div>
-          <div class="col-md-6">
-            <button class="btn btn-secondary btn-block" role="button" onclick="copyToClipboardFunction()" onmouseout="outFunc()">
-              <span class="tooltiptext" id="myTooltip">Copy Link <i class="far fa-clipboard"></i></span></button>
-          </div>
-        </div>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-
-
-  <script type="text/javascript">
-    function copyToClipboardFunction() {
-      var copyText = document.getElementById("inputContainingTextToBeCopied");
-      copyText.select();
-      document.execCommand("copy");
-      var tooltip = document.getElementById("myTooltip");
-      tooltip.innerHTML = "Done!";
-    }
-
-    function outFunc() {
-      var tooltip = document.getElementById("myTooltip");
-      tooltip.innerHTML = "Copy Link";
-    }
-  </script>
 
 
 </body>
