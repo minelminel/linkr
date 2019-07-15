@@ -56,3 +56,10 @@
   visibility: visible;
   opacity: 1;
 }
+
+.list-group{
+    max-height: 600px;
+    margin-bottom: 20px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}

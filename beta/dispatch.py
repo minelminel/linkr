@@ -24,7 +24,6 @@ class Dispatcher(object):
     def __init__(self, target):
     # target    :: url <string>
         self.target = target
-        print(target)
     # response  :: <Response Object> || None
         self.response = self._get_request()
     # success   :: <boolean>
@@ -35,7 +34,7 @@ class Dispatcher(object):
         self.title = self._parse_title()
     # description     :: <string>
         self.description = self._parse_description()
-    # favicon   ::  url <string>
+    # favicon   ::  url <string> as image 
         self.favicon = os.path.join("https://", self.friendly, "favicon.ico")
 
     # internal method
@@ -110,6 +109,18 @@ class Dispatcher(object):
                     friendly="",
                     status=700,
                     target="")
+
+    @staticmethod
+    def create_url(target):
+        if "http://" or "https://" in target:
+            proceed = True
+        else:
+            target = "https://" + target
+            proceed = True
+        if "." not in target:
+            proceed = False
+        return target, proceed
+
 
 
 if __name__ == "__main__":
