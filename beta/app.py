@@ -200,6 +200,11 @@ def dashboard():
     return jsonify(assets)
 
 
+@app.route("/beta")
+def beta():
+    return render_template("sidebar.html")
+
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
